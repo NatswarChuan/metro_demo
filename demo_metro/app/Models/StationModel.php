@@ -13,4 +13,8 @@ class StationModel extends Model
     protected $primaryKey = 'station_id';
     protected $keyType ='integer';
     public $incrementing = true;
+
+    public function orderRoute($routeId){
+        return $this->belongsToMany('App\Models\RouteModel', 'routes_stations', 'station_id','route_id')->where('routes_stations.route_id','=',$routeId)->first(['order'])->order;
+    }
 }

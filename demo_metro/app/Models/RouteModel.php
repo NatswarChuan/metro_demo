@@ -11,10 +11,12 @@ class RouteModel extends Model
 
     protected $table = 'routes';
     protected $primaryKey = 'route_id';
-    protected $keyType ='integer';
+    protected $keyType = 'integer';
     public $incrementing = true;
+    public $timestamps = false;
 
-    public function stations(){
-        return $this->belongsToMany('App\Models\StationModel', 'routes_stations', 'station_id','route_id')->orderBy('order');
+    public function stations()
+    {
+        return $this->belongsToMany('App\Models\StationModel', 'routes_stations', 'route_id', 'station_id')->orderBy('order')->get(['*', 'order']);
     }
 }

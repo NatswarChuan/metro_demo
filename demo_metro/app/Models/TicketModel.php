@@ -13,6 +13,16 @@ class TicketModel extends Model
     protected $primaryKey = 'ticket_id';
     protected $keyType ='integer';
     public $incrementing = true;
+    public $timestamps = false;
+    protected $fillable = [
+        'phone',
+        'station_id_start',
+        'station_id_end',
+        'total',
+        'route_id',
+        'count'
+    ];
+
 
     public function stationEnd(){
         return $this->hasOne('App\Models\StationModel','station_id','station_id_end');
