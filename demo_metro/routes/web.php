@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('listRoutes');
+});
+
+Route::get('/route/{id}', function (Request $request) {
+    $id = $request->id;
+    return view('route', ['id' => $id]);
 });

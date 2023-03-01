@@ -1,5 +1,6 @@
 .route-wrapper {position: relative;}
-.route { padding-top: 100px; }
+.route-wrapper-1 {position: relative;}
+.route { padding-top: 150px; }
 .station-dot { position: relative; }
 /* Gạch trái */
 .station-dot::before {
@@ -59,6 +60,7 @@
     white-space: nowrap;
     font-size: .8em;
 }
+
 /* Tên tuyến */
 .route-name {
     background: #ffd900;
@@ -70,10 +72,23 @@
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
     transition: .5s;
 }
-.route-wrapper:hover .route-name {
-    padding: 10px 60px;
+.route-wrapper:hover .route-name,
+.route-name-list:hover  {
+    padding: 10px 30px;
     font-weight: bold;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.15);
 
 }
 .route-tooltip { --bs-tooltip-bg: var(--bs-primary); }
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.route-name-list {
+    background: #ffd900;
+    padding: 10px 20px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+    transition: .5s;
+}

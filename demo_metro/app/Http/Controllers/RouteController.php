@@ -18,5 +18,9 @@ class RouteController extends Controller
         $result = RouteModel::find($id);
         return $result ? new RouteResource($result) : response(null,204);
     }
-
+     function getAllNameAPI()
+    {
+        $result = RouteModel::get(['route_id','name']);
+        return $result ? response($result) : response(null,204);
+    }
 }

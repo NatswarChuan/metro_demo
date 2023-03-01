@@ -21,7 +21,7 @@ class RouteResource extends JsonResource
             'length' => $this->length,
             'cost' => $this->cost,
             'min_cost' => $this->min_cost,
-            'stations' => $this->stations()->get()
+            'stations' => $this->stations()
         ];
     }
 }

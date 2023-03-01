@@ -17,6 +17,10 @@ class RouteModel extends Model
 
     public function stations()
     {
-        return $this->belongsToMany('App\Models\StationModel', 'routes_stations', 'route_id', 'station_id')->orderBy('order')->get(['*', 'order']);
+        $stations = $this->belongsToMany('App\Models\StationModel', 'routes_stations', 'route_id', 'station_id')->orderBy('order')->get(['*', 'order']);
+        foreach ($stations as $station){
+            $station = $station->routes();
+        }
+        return $stations;
     }
 }

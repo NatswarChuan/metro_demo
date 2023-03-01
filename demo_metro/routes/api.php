@@ -17,6 +17,7 @@ use App\Http\Controllers\TicketController;
 */
 
 Route::get('/routes',[RouteController::class,'getAllAPI']);
+Route::get('/routes/name',[RouteController::class,'getAllNameAPI']);
 Route::get('/route/{id}',[RouteController::class,'getByIdAPI']);
 Route::get('/ticket',[TicketController::class,'findByPhoneAPI']);
 Route::post('/ticket',[TicketController::class,'bookTicket']);
