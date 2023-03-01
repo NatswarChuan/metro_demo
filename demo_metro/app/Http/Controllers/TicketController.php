@@ -21,17 +21,17 @@ class TicketController extends Controller
                 if (count($result)) {
                     return TicketResource::collection($result);
                 } else {
-                    return response(['message'=>'no data'], 204);
+                    return response(['message' => 'no data'], 204);
                 }
             }
         }
-        return response(['message'=>'phone error'], 400);
+        return response(['message' => 'phone error'], 400);
     }
 
     function bookTicket(Request $request)
     {
         if ($this->validateRequestBookTicket($request)) {
-            return response(['message'=>'bad request'], 400);
+            return response(['message' => 'bad request'], 400);
         }
 
         /**
@@ -39,9 +39,6 @@ class TicketController extends Controller
          */
         $route  = RouteModel::find($request->route);
         $count = $request->count;
-        if (!$route && $route->blank < $count) {
-            return response(['message'=>'count error'], 400);
-        }
 
         /**
          * kiểm tra ga tồn tại và không trùng
@@ -49,18 +46,15 @@ class TicketController extends Controller
         $station_start = StationModel::find($request->station_start);
         $station_end = StationModel::find($request->station_end);
         if (!$station_end && !$station_start) {
-            return response(['message'=>'station end and station start error'], 400);
+            return response(['message' => 'station end and station start error'], 400);
         }
 
-        if(!$this->checkStionsInRoute($station_start ,$route) || !$this->checkStionsInRoute($station_end ,$route)){
-            return response(['message'=>'station end or station start error'],400);
-
+        if (!$this->checkStionsInRoute($station_start, $route) || !$this->checkStionsInRoute($station_end, $route)) {
+            return response(['message' => 'station end or station start error'], 400);
         }
 
-        $total = $this->getTotal($station_start,$station_end,$route);
+        $total = $this->getTotal($station_start, $station_end, $route);
 
-        $route->blank -= $count;
-        $route->save();
         try {
             TicketModel::create([
                 'phone' => $request->phone,
@@ -70,9 +64,9 @@ class TicketController extends Controller
                 'route_id' => $request->route,
                 'count' => $count
             ]);
-            return  response("Success",201);
+            return  response("Success", 201);
         } catch (Exception $e) {
-            return  response(['message'=>$e->getMessage()],417);
+            return  response(['message' => $e->getMessage()], 417);
         }
     }
 
@@ -82,10 +76,10 @@ class TicketController extends Controller
     private function validateRequestBookTicket(Request $request)
     {
         $result = ($request->has('phone') && $request->phone != '' && preg_match("/(84|0[3|5|7|8|9])([0-9]{8})/", $request->phone) &&
-        $request->has('station_start') && $request->station_start != '' &&
-        $request->has('station_end') && $request->station_end != '' &&
-        $request->has('route') && $request->route != '' &&
-        $request->has('count')) && $request->count != '';
+            $request->has('station_start') && $request->station_start != '' &&
+            $request->has('station_end') && $request->station_end != '' &&
+            $request->has('route') && $request->route != '' &&
+            $request->has('count')) && $request->count != '' && $request->count > 0;
         return !$result;
     }
 
@@ -107,7 +101,8 @@ class TicketController extends Controller
     /**
      * tính tổng tiền
      */
-    private function getTotal(StationModel $station_start,StationModel $station_end,RouteModel $route){
+    private function getTotal(StationModel $station_start, StationModel $station_end, RouteModel $route)
+    {
         $length = $station_end->orderRoute($route->route_id) - $station_start->orderRoute($route->route_id) + 1;
         $total = $route->min_cost;
         if ($length > ceil($route->length / 2)) {

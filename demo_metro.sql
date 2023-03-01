@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th2 27, 2023 lúc 05:09 AM
+-- Thời gian đã tạo: Th3 01, 2023 lúc 02:18 AM
 -- Phiên bản máy phục vụ: 5.7.36
 -- Phiên bản PHP: 7.4.26
 
@@ -37,7 +37,6 @@ CREATE TABLE IF NOT EXISTS `routes` (
   `length` varchar(4) DEFAULT NULL,
   `min_cost` int(5) DEFAULT NULL,
   `cost` int(4) DEFAULT NULL,
-  `blank` int(3) NOT NULL DEFAULT '100',
   PRIMARY KEY (`route_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -45,10 +44,10 @@ CREATE TABLE IF NOT EXISTS `routes` (
 -- Đang đổ dữ liệu cho bảng `routes`
 --
 
-INSERT INTO `routes` (`route_id`, `name`, `opt_time`, `length`, `min_cost`, `cost`, `blank`) VALUES
-(1, 'Tuyến số 1', '5:00 - 21:00', '19.7', 12000, 4000, 89),
-(2, 'Tuyến số 2', '4:30 - 21:00', '9.1', 10000, 3000, 100),
-(3, 'Tuyến số 5A', '5:30 - 20:30', '5.2', 8000, 2000, 100);
+INSERT INTO `routes` (`route_id`, `name`, `opt_time`, `length`, `min_cost`, `cost`) VALUES
+(1, 'Tuyến số 1', '5:00 - 21:00', '19.7', 12000, 4000),
+(2, 'Tuyến số 2', '4:30 - 21:00', '9.1', 10000, 3000),
+(3, 'Tuyến số 5A', '5:30 - 20:30', '5.2', 8000, 2000);
 
 -- --------------------------------------------------------
 
